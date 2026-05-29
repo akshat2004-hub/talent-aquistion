@@ -119,6 +119,7 @@ export interface OutreachMessage {
   attachment_url?: string | null;
   attachment_media_type?: string | null;
   attachment_size?: number | null;
+  options?: string[] | null;
 }
 
 export interface CandidateCallItem {

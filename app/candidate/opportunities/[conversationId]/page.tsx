@@ -173,7 +173,8 @@ export default function CandidateOpportunityDetailPage() {
                   { 
                     sender: "client", 
                     message: liveRes.message, 
-                    created_at: new Date().toISOString() 
+                    created_at: new Date().toISOString(),
+                    options: liveRes.options || []
                   },
                 ],
               }
@@ -447,6 +448,28 @@ export default function CandidateOpportunityDetailPage() {
                 >
                   {new Date(m.created_at).toLocaleString()}
                 </p>
+                {m.options && m.options.length > 0 && idx === detail.messages.length - 1 ? (
+                  <div className="mt-3 flex flex-wrap gap-2">
+                    {m.options.map((opt, i) => (
+                      <button
+                        key={i}
+                        onClick={(e) => {
+                          e.preventDefault();
+                          setMessageText(opt);
+                          // Submit it right away
+                          setTimeout(() => {
+                            const event = new Event('submit', { cancelable: true, bubbles: true });
+                            document.querySelector('form')?.dispatchEvent(event);
+                          }, 50);
+                        }}
+                        disabled={submitting}
+                        className="rounded-full border border-indigo-200 bg-indigo-50 px-3 py-1.5 text-xs font-medium text-indigo-700 hover:bg-indigo-100 dark:border-indigo-500/30 dark:bg-indigo-500/10 dark:text-indigo-300 dark:hover:bg-indigo-500/20"
+                      >
+                        {opt}
+                      </button>
+                    ))}
+                  </div>
+                ) : null}
               </li>
             ))}
           </ul>

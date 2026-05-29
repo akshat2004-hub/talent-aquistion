@@ -6,7 +6,7 @@ import type {
   LiveChatResponse,
 } from "./types";
 
-const API_BASE = "https://ai-chatbot-ueob.onrender.com";
+const API_BASE = "http://localhost:8000";
 
 export class ApiError extends Error {
   status: number;
